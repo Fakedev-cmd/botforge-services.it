@@ -12,7 +12,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { formatTimeAgo } from "@/lib/utils";
 import { useAuth } from "@/lib/auth";
 import { insertReviewSchema, type InsertReview, type Review, type User } from "@shared/schema";
-import { Star } from "lucide-react";
+import { Star, MessageCircle, ThumbsUp } from "lucide-react";
 
 interface ReviewWithUser extends Review {
   user: User;
@@ -99,6 +99,11 @@ export default function Reviews() {
     <div className="bg-slate-50 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
+          <div className="flex justify-center mb-6">
+            <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
+              <MessageCircle className="h-8 w-8 text-white" />
+            </div>
+          </div>
           <h2 className="text-4xl font-bold text-slate-900 mb-4">Customer Reviews</h2>
           <p className="text-xl text-slate-600">See what our customers are saying about BotForge</p>
         </div>

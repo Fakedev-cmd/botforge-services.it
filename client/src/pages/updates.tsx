@@ -14,6 +14,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { formatDate } from "@/lib/utils";
 import { useAuth } from "@/lib/auth";
 import { insertUpdateSchema, type InsertUpdate, type Update, type User } from "@shared/schema";
+import { Bell, Newspaper, AlertCircle } from "lucide-react";
 
 interface UpdateWithAuthor extends Update {
   author: User;
@@ -85,6 +86,11 @@ export default function Updates() {
     <div className="bg-white py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
+          <div className="flex justify-center mb-6">
+            <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
+              <Newspaper className="h-8 w-8 text-white" />
+            </div>
+          </div>
           <h2 className="text-4xl font-bold text-slate-900 mb-4">Latest Updates</h2>
           <p className="text-xl text-slate-600">Stay informed with the latest news and product updates</p>
         </div>

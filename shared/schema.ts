@@ -10,7 +10,7 @@ export const users = pgTable("users", {
   password: text("password").notNull(),
   firstName: text("first_name").notNull(),
   lastName: text("last_name").notNull(),
-  role: text("role").notNull().default("customer"), // 'customer', 'admin'
+  role: text("role").notNull().default("user"), // 'owner', 'manager', 'developer', 'customer', 'user'
   status: text("status").notNull().default("active"), // 'active', 'banned', 'pending'
   profileImage: text("profile_image"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
@@ -165,6 +165,8 @@ export const registerSchema = insertUserSchema.omit({
   role: true,
   status: true,
   profileImage: true,
+}).extend({
+  role: z.enum(["owner", "manager", "developer", "customer", "user"]).default("user"),
 });
 
 export const insertProductSchema = createInsertSchema(products).omit({

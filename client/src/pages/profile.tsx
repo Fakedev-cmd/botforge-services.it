@@ -13,7 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { formatDate, formatCurrency, formatTimeAgo, getStatusBadgeClass } from "@/lib/utils";
 import { useAuth } from "@/lib/auth";
-import { User, ShoppingCart, Ticket, Settings, Camera } from "lucide-react";
+import { User, ShoppingCart, Ticket, Settings, Camera, Crown, Shield, Code, UserCheck } from "lucide-react";
 import type { Order, Product, Ticket as TicketType } from "@shared/schema";
 import { z } from "zod";
 
@@ -141,9 +141,16 @@ export default function Profile() {
                       {user.firstName} {user.lastName}
                     </h3>
                     <p className="text-slate-600">{user.email}</p>
-                    <Badge variant="secondary" className="mt-1">
-                      {user.role === "customer" ? "Customer" : "Administrator"}
-                    </Badge>
+                    <div className="flex items-center gap-2 mt-1">
+                      {user.role === "owner" && <Crown className="h-4 w-4 text-red-500" />}
+                      {user.role === "manager" && <Shield className="h-4 w-4 text-purple-500" />}
+                      {user.role === "developer" && <Code className="h-4 w-4 text-green-500" />}
+                      {user.role === "customer" && <ShoppingCart className="h-4 w-4 text-blue-500" />}
+                      {user.role === "user" && <UserCheck className="h-4 w-4 text-gray-500" />}
+                      <Badge variant="secondary">
+                        {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
+                      </Badge>
+                    </div>
                   </div>
                 </div>
               </CardContent>

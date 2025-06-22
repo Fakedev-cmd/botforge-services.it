@@ -13,7 +13,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { formatTimeAgo, getStatusBadgeClass } from "@/lib/utils";
 import { useAuth } from "@/lib/auth";
 import { insertTicketSchema, type InsertTicket, type Ticket } from "@shared/schema";
-import { Book, Video, HelpCircle, MessageSquare, Phone, Mail, Clock } from "lucide-react";
+import { Book, Video, HelpCircle, MessageSquare, Phone, Mail, Clock, LifeBuoy } from "lucide-react";
 
 export default function Support() {
   const { toast } = useToast();
@@ -77,6 +77,11 @@ export default function Support() {
     <div className="bg-slate-50 py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
+          <div className="flex justify-center mb-6">
+            <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
+              <LifeBuoy className="h-8 w-8 text-white" />
+            </div>
+          </div>
           <h2 className="text-4xl font-bold text-slate-900 mb-4">Support Center</h2>
           <p className="text-xl text-slate-600">Get help when you need it</p>
         </div>

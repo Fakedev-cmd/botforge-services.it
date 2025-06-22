@@ -17,7 +17,7 @@ import { formatDate, formatCurrency, formatTimeAgo, getStatusBadgeClass, getPrio
 import { useAuth } from "@/lib/auth";
 import { 
   BarChart3, Users, ShoppingCart, Ticket, Megaphone, QrCode, Key,
-  Eye, Ban, CheckCircle, XCircle, Download
+  Eye, Ban, CheckCircle, XCircle, Download, Crown, Shield, Code, UserCheck
 } from "lucide-react";
 import type { 
   User, Order, Product, Ticket as TicketType, PasswordChangeRequest 
@@ -383,9 +383,16 @@ export default function Admin() {
                             </td>
                             <td className="py-3 px-4 text-slate-600">{user.email}</td>
                             <td className="py-3 px-4">
-                              <Badge className={getRoleBadgeClass(user.role)}>
-                                {user.role}
-                              </Badge>
+                              <div className="flex items-center gap-2">
+                                {user.role === "owner" && <Crown className="h-4 w-4 text-red-500" />}
+                                {user.role === "manager" && <Shield className="h-4 w-4 text-purple-500" />}
+                                {user.role === "developer" && <Code className="h-4 w-4 text-green-500" />}
+                                {user.role === "customer" && <ShoppingCart className="h-4 w-4 text-blue-500" />}
+                                {user.role === "user" && <UserCheck className="h-4 w-4 text-gray-500" />}
+                                <Badge className={getRoleBadgeClass(user.role)}>
+                                  {user.role}
+                                </Badge>
+                              </div>
                             </td>
                             <td className="py-3 px-4">
                               <Badge className={getStatusBadgeClass(user.status, 'user')}>

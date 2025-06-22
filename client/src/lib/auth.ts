@@ -48,11 +48,39 @@ class AuthManager {
   }
 
   isAdmin(): boolean {
-    return this.state.user?.role === "admin";
+    return this.state.user?.role === "owner" || this.state.user?.role === "manager";
   }
 
   isCustomer(): boolean {
     return this.state.user?.role === "customer";
+  }
+
+  isDeveloper(): boolean {
+    return this.state.user?.role === "developer";
+  }
+
+  isOwner(): boolean {
+    return this.state.user?.role === "owner";
+  }
+
+  isManager(): boolean {
+    return this.state.user?.role === "manager";
+  }
+
+  hasPermission(action: string): boolean {
+    const role = this.state.user?.role;
+    if (!role) return false;
+
+    const permissions = {
+      owner: ["all"],
+      manager: ["manage_users", "manage_orders", "manage_tickets", "publish_updates", "view_admin"],
+      developer: ["manage_tickets", "view_analytics"],
+      customer: ["create_reviews", "create_tickets", "view_orders"],
+      user: ["create_tickets"]
+    };
+
+    return permissions[role as keyof typeof permissions]?.includes(action) || 
+           permissions[role as keyof typeof permissions]?.includes("all") || false;
   }
 
   getCurrentUser(): User | null {
@@ -78,6 +106,10 @@ export function useAuth() {
     logout: authManager.logout.bind(authManager),
     isAdmin: authManager.isAdmin.bind(authManager),
     isCustomer: authManager.isCustomer.bind(authManager),
+    isDeveloper: authManager.isDeveloper.bind(authManager),
+    isOwner: authManager.isOwner.bind(authManager),
+    isManager: authManager.isManager.bind(authManager),
+    hasPermission: authManager.hasPermission.bind(authManager),
     getCurrentUser: authManager.getCurrentUser.bind(authManager)
   };
 }

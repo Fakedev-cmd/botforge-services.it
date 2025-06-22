@@ -6,13 +6,13 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { formatCurrency } from "@/lib/utils";
 import { useAuth } from "@/lib/auth";
-import { Bot, BarChart3, Settings, Check } from "lucide-react";
+import { Bot, BarChart3, Settings, Check, Sparkles, TrendingUp, Cog } from "lucide-react";
 import type { Product } from "@shared/schema";
 
 const productIcons = {
   "AI Assistant": Bot,
-  "Analytics": BarChart3,
-  "Automation": Settings,
+  "Analytics": TrendingUp,
+  "Automation": Cog,
 };
 
 export default function Products() {
@@ -68,6 +68,11 @@ export default function Products() {
     <div className="bg-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
+          <div className="flex justify-center mb-6">
+            <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
+              <Sparkles className="h-8 w-8 text-white" />
+            </div>
+          </div>
           <h2 className="text-4xl font-bold text-slate-900 mb-4">Our Products</h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             Discover our range of AI-powered solutions designed to transform your business operations.

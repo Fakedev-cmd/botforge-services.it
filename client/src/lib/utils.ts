@@ -57,3 +57,14 @@ export function getPriorityBadgeClass(priority: string): string {
 export function getRoleBadgeClass(role: string): string {
   return `role-badge role-${role.toLowerCase()}`;
 }
+
+export function getRoleIcon(role: string): string {
+  const icons = {
+    owner: "👑",
+    manager: "🛡️", 
+    developer: "💻",
+    customer: "🛒",
+    user: "👤"
+  };
+  return icons[role as keyof typeof icons] || "👤";
+}

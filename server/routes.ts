@@ -112,8 +112,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Verify user has customer role (this would be handled by middleware in a real app)
       const user = await storage.getUser(reviewData.userId);
-      if (!user || user.role !== "customer") {
-        return res.status(403).json({ message: "Only customers can write reviews" });
+      if (!user || (user.role !== "customer" && user.role !== "user")) {
+        return res.status(403).json({ message: "Only customers and users can write reviews" });
       }
 
       const review = await storage.createReview(reviewData);
@@ -142,8 +142,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Verify user has admin role
       const user = await storage.getUser(updateData.authorId);
-      if (!user || user.role !== "admin") {
-        return res.status(403).json({ message: "Only admins can publish updates" });
+      if (!user || (user.role !== "owner" && user.role !== "manager")) {
+        return res.status(403).json({ message: "Only owners and managers can publish updates" });
       }
 
       const update = await storage.createUpdate(updateData);
